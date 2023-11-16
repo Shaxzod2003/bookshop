@@ -234,12 +234,19 @@ class GenreView(View):
         return JsonResponse(result, safe=False)
 
     def post(self, request:HttpRequest)->JsonResponse:
-        pass
+        data=json.loads(request.body.decode)
+        Genre.objects.create(
+            name=data.get("name")
+        )
+        return JsonResponse({"message":"created object"})
+
 
 
 class GenreDetailView(View):
     def get(self, request:HttpRequest,pk:int)->JsonResponse:
-        pass
+        genre=Genre.objects.get(id=pk)
+        result=model_to_dict(genre)
+        return JsonResponse(result)
 
     def put(self,request:HttpRequest,pk:int)->JsonResponse:
         data=json.loads(request.body.decode())
