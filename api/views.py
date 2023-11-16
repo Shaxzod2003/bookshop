@@ -241,7 +241,6 @@ class GenreView(View):
         return JsonResponse({"message":"created object"})
 
 
-
 class GenreDetailView(View):
     def get(self, request:HttpRequest,pk:int)->JsonResponse:
         genre=Genre.objects.get(id=pk)
